@@ -1,3 +1,5 @@
+#pragma once
+
 #include <memory>
 #include <string>
 #include <vector>
@@ -7,7 +9,7 @@
 // NCURSES
 #include <ncurses.h>
 
-class jvim
+class JVim
 {
 private:
     size_t x, y;
@@ -16,8 +18,8 @@ private:
     std::vector<std::string> lines, cmds;
 
 public:
-    jvim(const std::string &);
-    ~jvim();
+    JVim(const std::string &);
+    ~JVim();
     void run();
 
     void update();
@@ -25,5 +27,10 @@ public:
 protected:
     void statusLine();
     void input(int);
-    void print();
+    void printLines();
+    void printCmd();
+    void upCmd();
+    void downCmd();
+    void endCmd();
+    void homeCmd();
 };
