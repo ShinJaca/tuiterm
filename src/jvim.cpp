@@ -118,16 +118,7 @@ void JVim::input(int c)
             break;
         case 10:
         case KEY_ENTER:
-            ++y;
-            x = 0;
-            if (y == cmds.size())
-            {
-                cmds.insert(cmds.begin() + y, "");
-            }
-            else
-            {
-                y = cmds.size() - 1;
-            }
+            enterCmd();
             break;
         case KEY_UP:
             upCmd();
@@ -159,7 +150,7 @@ void JVim::printLines()
 {
     if (!lines.empty())
     {
-        for (size_t i{}; i < (size_t)LINES - 1; ++i)
+        for (size_t i{}; i < (size_t)LINES - 4; ++i)
         {
             if (i >= lines.size())
             {
@@ -172,7 +163,7 @@ void JVim::printLines()
             }
             clrtoeol();
         }
-        move(y, x);
+        // move(y, x);
     }
 }
 
@@ -223,4 +214,19 @@ void JVim::endCmd()
 void JVim::homeCmd()
 {
     x = 0;
+}
+
+void JVim::enterCmd()
+{
+    x = 0;
+    lines.insert(lines.end(), 1, cmds[y]);
+    if (y == cmds.size() - 1)
+    {
+        ++y;
+        cmds.insert(cmds.begin() + y, "");
+    }
+    else
+    {
+        y = cmds.size() - 1;
+    }
 }

@@ -33,4 +33,5 @@ protected:
     void downCmd();
     void endCmd();
     void homeCmd();
+    void enterCmd();
 };
