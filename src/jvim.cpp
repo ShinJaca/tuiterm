@@ -119,8 +119,15 @@ void JVim::input(int c)
         case 10:
         case KEY_ENTER:
             ++y;
-            cmds.insert(cmds.begin() + y, "");
             x = 0;
+            if (y == cmds.size())
+            {
+                cmds.insert(cmds.begin() + y, "");
+            }
+            else
+            {
+                y = cmds.size() - 1;
+            }
             break;
         case KEY_UP:
             upCmd();
@@ -185,10 +192,11 @@ void JVim::upCmd()
     {
         --y;
     }
-    if (x >= cmds[y].length())
-    {
-        x = cmds[y].length();
-    }
+    // if (x >= cmds[y].length())
+    // {
+    //     x = cmds[y].length();
+    // }
+    x = cmds[y].length();
     move(LINES - 2, x);
 }
 
@@ -199,10 +207,11 @@ void JVim::downCmd()
         ++y;
     }
 
-    if (x >= cmds[y].length())
-    {
-        x = cmds[y].length();
-    }
+    // if (x >= cmds[y].length())
+    // {
+    //     x = cmds[y].length();
+    // }
+    x = cmds[y].length();
     move(LINES - 2, x);
 }
 
